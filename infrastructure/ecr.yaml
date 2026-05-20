@@ -3,12 +3,6 @@ Description: >
   Private Amazon ECR repository for containerization-demo.
 
 Parameters:
-  ImageTagMutability:
-    Type: String
-    Default: IMMUTABLE
-    AllowedValues: [MUTABLE, IMMUTABLE]
-    Description: IMMUTABLE prevents tag overwrites (recommended for prod)
-
   MaxImageCount:
     Type: Number
     Default: 10
@@ -27,7 +21,7 @@ Resources:
         ScanOnPush: true
       EncryptionConfiguration:
         EncryptionType: AES256
-      ImageTagMutability: !Ref ImageTagMutability
+      ImageTagMutability: IMMUTABLE
       EmptyOnDelete: false
       RepositoryPolicyText:
         Version: '2012-10-17'
