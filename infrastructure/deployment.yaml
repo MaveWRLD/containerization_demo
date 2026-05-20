@@ -1,0 +1,20 @@
+# CloudFormation GitSync deployment file.
+# GitSync watches this file; any change triggers a stack create/update.
+# Docs: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
+
+template-file-path: infrastructure/ecr.yaml
+
+parameters:
+  ImageTagMutability: IMMUTABLE
+  MaxImageCount: "10"
+  # GitHubActionsRoleArn: arn:aws:iam::123456789012:role/GitHubActionsRole
+  # Uncomment and set the role ARN above once the GitHub OIDC role is created.
+  # Leave blank to allow the full AWS account (least-privilege: fill it in).
+
+tags:
+  - key: ManagedBy
+    value: CloudFormation-GitSync
+  - key: Project
+    value: containerization-demo
+  - key: Environment
+    value: prod
