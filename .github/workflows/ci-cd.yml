@@ -36,8 +36,7 @@ jobs:
           REPOSITORY: ${{ vars.ECR_REPOSITORY}}
           IMAGE_TAG: ${{github.sha}}
         run: |
-          docker buildx build \
-            --push \
-            -t $REGISTRY/$REPOSITORY:$IMAGE_TAG \
-            -t $REGISTRY/$REPOSITORY:latest \
+          docker buildx build --push \
+            -t "$REGISTRY/$REPOSITORY:$IMAGE_TAG" \
+            -t "$REGISTRY/$REPOSITORY:latest" \
             .
