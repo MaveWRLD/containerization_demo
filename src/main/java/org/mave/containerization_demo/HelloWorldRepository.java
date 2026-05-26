@@ -11,7 +11,7 @@ public class HelloWorldRepository {
     private final HelloWorldModel helloWorldModel;
 
     public String getHelloWorld() {
-        helloWorldModel.setMessage("Hello World!");
+        helloWorldModel.setMessage("Hello World V2!");
         return helloWorldModel.getMessage();
     }
 
