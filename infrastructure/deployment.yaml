@@ -1,7 +1,0 @@
-template-file-path: ./infrastructure/ecr.yaml
-
-parameters:
-  MaxImageCount: "10"
-tags:
-  Project: containerization_demo
-

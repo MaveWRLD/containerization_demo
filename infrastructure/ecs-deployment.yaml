@@ -1,0 +1,10 @@
+template-file-path: ./infrastructure/ecs-fargate.yaml
+
+parameters:
+  ECRImageUri: "REPLACE_WITH_YOUR_ECR_IMAGE_URI"
+  ContainerPort: "8080"
+  DesiredCount: "1"
+
+tags:
+  Project: containerization_demo
+  ManagedBy: CloudFormation-GitSync
