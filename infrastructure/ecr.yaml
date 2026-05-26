@@ -21,7 +21,7 @@ Resources:
         ScanOnPush: true
       EncryptionConfiguration:
         EncryptionType: AES256
-      ImageTagMutability: IMMUTABLE
+      ImageTagMutability: MUTABLE
       EmptyOnDelete: false
       RepositoryPolicyText:
         Version: '2012-10-17'
