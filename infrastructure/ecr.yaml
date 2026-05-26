@@ -36,7 +36,7 @@ Resources:
           - Sid: AllowAccountRootFull
             Effect: Allow
             Principal:
-              AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:root'
+              AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:kofi_iam_user'
             Action:
               - ecr:GetDownloadUrlForLayer
               - ecr:BatchGetImage
