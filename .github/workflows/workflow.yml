@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  AWS_REGION: eu-north-1
+  AWS_REGION: eu-central-1
   ECR_REPOSITORY: containerization-demo
 
 jobs:
@@ -47,3 +47,11 @@ jobs:
 
       - name: Image digest
         run: echo "Pushed image ${{ steps.build-image.outputs.image }}"
+
+#      - name: Upload deployment config to S3
+#        env:
+#          CONFIG_BUCKET: ${{ secrets.CONFIG_BUCKET_NAME }}
+#        run: |
+#          zip config.zip taskdef.json appspec.yaml
+#          aws s3 cp config.zip s3://$CONFIG_BUCKET/config.zip
+
