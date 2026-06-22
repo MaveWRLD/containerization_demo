@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${trip.title}">Trip Memory</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: sans-serif; max-width: 680px; margin: 40px auto; padding: 0 20px; background: #f9f9f9; }
+        h1 { color: #333; margin-bottom: 4px; }
+        .meta { color: #888; font-size: 14px; margin-bottom: 20px; }
+        .photo img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 8px; }
+        .notes { margin-top: 24px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); white-space: pre-wrap; line-height: 1.6; }
+        .actions { margin-top: 24px; display: flex; gap: 12px; }
+        .btn { padding: 9px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-block; }
+        .btn-primary { background: #4a90d9; color: #fff; }
+        .btn-danger { background: #e05252; color: #fff; }
+        .btn-secondary { background: #888; color: #fff; }
+    </style>
+</head>
+<body>
+
+<h1 th:text="${trip.title}">Title</h1>
+<p class="meta">
+    <span th:text="${trip.destination}">Destination</span>
+    <span th:if="${trip.tripDate}"> &bull; <span th:text="${trip.tripDate}">Date</span></span>
+</p>
+
+<div class="photo" th:if="${trip.imagePath}">
+    <img th:src="${trip.imagePath}" th:alt="${trip.title}">
+</div>
+
+<div class="notes" th:if="${trip.notes}" th:text="${trip.notes}">Notes</div>
+
+<div class="actions">
+    <a th:href="@{'/trips/' + ${trip.id} + '/edit'}" class="btn btn-primary">Edit</a>
+    <form th:action="@{'/trips/' + ${trip.id} + '/delete'}" method="post" style="display:inline">
+        <button type="submit" class="btn btn-danger"
+                onclick="return confirm('Delete this memory?')">Delete</button>
+    </form>
+    <a th:href="@{/trips}" class="btn btn-secondary">Back</a>
+</div>
+
+</body>
+</html>
