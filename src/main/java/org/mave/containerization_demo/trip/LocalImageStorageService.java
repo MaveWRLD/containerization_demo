@@ -1,5 +1,6 @@
 package org.mave.containerization_demo.trip;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @Service
+@ConditionalOnProperty(name = "app.storage", havingValue = "local", matchIfMissing = true)
 public class LocalImageStorageService implements ImageStorageService {
 
     private static final Path UPLOAD_DIR = Paths.get("uploads");

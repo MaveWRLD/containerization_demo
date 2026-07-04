@@ -17,6 +17,22 @@
           "protocol": "tcp"
         }
       ],
+      "environment": [
+        {
+          "name": "APP_STORAGE",
+          "value": "s3"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "IMAGES_BUCKET_NAME",
+          "valueFrom": "arn:aws:ssm:eu-central-1:481980074895:parameter/photo-gallery/s3/images-bucket-name"
+        },
+        {
+          "name": "CLOUDFRONT_DOMAIN",
+          "valueFrom": "arn:aws:ssm:eu-central-1:481980074895:parameter/photo-gallery/cloudfront/domain-name"
+        }
+      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
