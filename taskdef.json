@@ -4,8 +4,8 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
   "memory": "512",
-  "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecs-fargate-demo-task-execution-role",
-  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecs-fargate-demo-task-role",
+  "executionRoleArn": "arn:aws:iam::481980074895:role/ecs-fargate-demo-task-execution-role",
+  "taskRoleArn": "arn:aws:iam::481980074895:role/ecs-fargate-demo-task-role",
   "containerDefinitions": [
     {
       "name": "ecs-fargate-demo-container",
@@ -21,7 +21,7 @@
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/ecs-fargate-demo",
-          "awslogs-region": "<REGION>",
+          "awslogs-region": "eu-central-1",
           "awslogs-stream-prefix": "ecs"
         }
       }
