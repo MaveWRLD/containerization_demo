@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${trip.title}">Trip Memory</title>
+    <title>Trip Memory</title>
     <style>
         * { box-sizing: border-box; }
         body { font-family: sans-serif; max-width: 680px; margin: 40px auto; padding: 0 20px; background: #f9f9f9; }
@@ -19,17 +19,11 @@
 </head>
 <body>
 
-<h1 th:text="${trip.title}">Title</h1>
-<p class="meta">
-    <span th:text="${trip.destination}">Destination</span>
-    <span th:if="${trip.tripDate}"> &bull; <span th:text="${trip.tripDate}">Date</span></span>
-</p>
-
 <div class="photo" th:if="${trip.imagePath}">
-    <img th:src="${trip.imagePath}" th:alt="${trip.title}">
+    <img th:src="${trip.imagePath}" alt="Trip photo">
 </div>
 
-<div class="notes" th:if="${trip.notes}" th:text="${trip.notes}">Notes</div>
+<div class="notes" th:if="${trip.description}" th:text="${trip.description}">Description</div>
 
 <div class="actions">
     <a th:href="@{'/trips/' + ${trip.id} + '/edit'}" class="btn btn-primary">Edit</a>

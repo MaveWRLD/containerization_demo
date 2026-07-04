@@ -29,12 +29,10 @@
 
 <div class="grid" th:if="${!trips.isEmpty()}">
     <div class="card" th:each="trip : ${trips}">
-        <img th:if="${trip.imagePath}" th:src="${trip.imagePath}" th:alt="${trip.title}">
+        <img th:if="${trip.imagePath}" th:src="${trip.imagePath}" alt="Trip photo">
         <div class="card-placeholder" th:unless="${trip.imagePath}">No image</div>
         <div class="card-body">
-            <h3 th:text="${trip.title}">Title</h3>
-            <p th:text="${trip.destination}">Destination</p>
-            <p th:text="${trip.tripDate}">Date</p>
+            <p th:text="${trip.description}">Description</p>
             <div class="card-actions">
                 <a th:href="@{'/trips/' + ${trip.id}}" class="btn btn-sm">View</a>
                 <a th:href="@{'/trips/' + ${trip.id} + '/edit'}" class="btn btn-sm btn-secondary">Edit</a>
