@@ -48,6 +48,8 @@ jobs:
 
       - name: Inject env vars into taskdef.json
         env:
+          DB_SECRET_ARN: ${{ vars.DB_SECRET_ARN }}
+          DB_HOST: ${{ vars.DB_HOST }}
           EXECUTION_ROLE_ARN: ${{ vars.EXECUTION_ROLE_ARN }}
           TASK_ROLE_ARN: ${{ vars.TASK_ROLE_ARN }}
           IMAGES_BUCKET_PARAM_ARN: ${{ vars.IMAGES_BUCKET_PARAM_ARN }}
