@@ -4,8 +4,8 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
   "memory": "512",
-  "executionRoleArn": "arn:aws:iam::481980074895:role/ecs-fargate-demo-task-execution-role",
-  "taskRoleArn": "arn:aws:iam::481980074895:role/ecs-fargate-demo-task-role",
+  "executionRoleArn": "${EXECUTION_ROLE_ARN}",
+  "taskRoleArn": "${TASK_ROLE_ARN}",
   "containerDefinitions": [
     {
       "name": "ecs-fargate-demo-container",
@@ -21,16 +21,36 @@
         {
           "name": "APP_STORAGE",
           "value": "s3"
+        },
+        {
+          "name": "DB_HOST",
+          "value": "${DB_HOST}"
+        },
+        {
+          "name": "DB_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "DB_NAME",
+          "value": "photogallery"
         }
       ],
       "secrets": [
         {
           "name": "IMAGES_BUCKET_NAME",
-          "valueFrom": "arn:aws:ssm:eu-central-1:481980074895:parameter/photo-gallery/s3/images-bucket-name"
+          "valueFrom": "${IMAGES_BUCKET_PARAM_ARN}"
         },
         {
           "name": "CLOUDFRONT_DOMAIN",
-          "valueFrom": "arn:aws:ssm:eu-central-1:481980074895:parameter/photo-gallery/cloudfront/domain-name"
+          "valueFrom": "${CLOUDFRONT_PARAM_ARN}"
+        },
+        {
+          "name": "SPRING_DATASOURCE_USERNAME",
+          "valueFrom": "${DB_SECRET_ARN}:username::"
+        },
+        {
+          "name": "SPRING_DATASOURCE_PASSWORD",
+          "valueFrom": "${DB_SECRET_ARN}:password::"
         }
       ],
       "logConfiguration": {

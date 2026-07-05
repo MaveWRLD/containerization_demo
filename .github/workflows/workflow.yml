@@ -46,6 +46,16 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
+      - name: Inject env vars into taskdef.json
+        env:
+          DB_SECRET_ARN: ${{ vars.DB_SECRET_ARN }}
+          DB_HOST: ${{ vars.DB_HOST }}
+          EXECUTION_ROLE_ARN: ${{ vars.EXECUTION_ROLE_ARN }}
+          TASK_ROLE_ARN: ${{ vars.TASK_ROLE_ARN }}
+          IMAGES_BUCKET_PARAM_ARN: ${{ vars.IMAGES_BUCKET_PARAM_ARN }}
+          CLOUDFRONT_PARAM_ARN: ${{ vars.CLOUDFRONT_PARAM_ARN }}
+        run: envsubst < taskdef.json > taskdef.resolved.json && mv taskdef.resolved.json taskdef.json
+
       - name: Upload deployment config to S3
         run: |
           zip config.zip taskdef.json appspec.yaml
