@@ -56,6 +56,9 @@ jobs:
           CLOUDFRONT_PARAM_ARN: ${{ vars.CLOUDFRONT_PARAM_ARN }}
         run: envsubst < taskdef.json > taskdef.resolved.json && mv taskdef.resolved.json taskdef.json
 
+      - name: Debug - show resolved taskdef.json
+        run: cat taskdef.json
+
       - name: Upload deployment config to S3
         run: |
           zip config.zip taskdef.json appspec.yaml
