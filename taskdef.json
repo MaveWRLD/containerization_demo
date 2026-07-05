@@ -21,18 +21,6 @@
         {
           "name": "APP_STORAGE",
           "value": "s3"
-        },
-        {
-          "name": "DB_HOST",
-          "value": "${DB_HOST}"
-        },
-        {
-          "name": "DB_PORT",
-          "value": "5432"
-        },
-        {
-          "name": "DB_NAME",
-          "value": "photogallery"
         }
       ],
       "secrets": [
@@ -43,14 +31,6 @@
         {
           "name": "CLOUDFRONT_DOMAIN",
           "valueFrom": "${CLOUDFRONT_PARAM_ARN}"
-        },
-        {
-          "name": "SPRING_DATASOURCE_USERNAME",
-          "valueFrom": "${DB_SECRET_ARN}:username::"
-        },
-        {
-          "name": "SPRING_DATASOURCE_PASSWORD",
-          "valueFrom": "${DB_SECRET_ARN}:password::"
         }
       ],
       "logConfiguration": {
