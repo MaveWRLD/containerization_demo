@@ -7,9 +7,8 @@ on:
   workflow_dispatch:
 
 env:
-  AWS_REGION: eu-central-1
-  ECR_REPOSITORY: containerization-demo
-  CONFIG_BUCKET: ecs-fargate-demo-deploy-config-481980074895
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
 
 jobs:
   build-and-push:
@@ -45,24 +44,6 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
-      - name: Inject env vars into taskdef.json
-        env:
-          DB_SECRET_ARN: ${{ vars.DB_SECRET_ARN }}
-          DB_HOST: ${{ vars.DB_HOST }}
-          EXECUTION_ROLE_ARN: ${{ vars.EXECUTION_ROLE_ARN }}
-          TASK_ROLE_ARN: ${{ vars.TASK_ROLE_ARN }}
-          IMAGES_BUCKET_PARAM_ARN: ${{ vars.IMAGES_BUCKET_PARAM_ARN }}
-          CLOUDFRONT_PARAM_ARN: ${{ vars.CLOUDFRONT_PARAM_ARN }}
-        run: envsubst < taskdef.json > taskdef.resolved.json && mv taskdef.resolved.json taskdef.json
-
-      - name: Debug - show resolved taskdef.json
-        run: cat taskdef.json
-
-      - name: Upload deployment config to S3
-        run: |
-          zip config.zip taskdef.json appspec.yaml
-          aws s3 cp config.zip s3://${{ env.CONFIG_BUCKET }}/config.zip
 
       - name: Image digest
         run: echo "Pushed image ${{ steps.build-image.outputs.image }}"
