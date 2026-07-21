@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Lab Info</title>
     <style>
         body { font-family: sans-serif; max-width: 500px; margin: 60px auto; padding: 0 20px; }
-        label { display: block; margin-top: 16px; font-weight: bold; }
-        input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
-        button { margin-top: 20px; padding: 10px 24px; cursor: pointer; }
         .result { margin-top: 32px; padding: 16px; background: #f0f0f0; border-radius: 4px; }
     </style>
 </head>
@@ -15,19 +12,9 @@
 
 <h1>Lab Info</h1>
 
-<form th:action="@{/lab}" method="post">
-    <label for="fullName">Full Name</label>
-    <input type="text" id="fullName" name="fullName" th:value="${fullName}" placeholder="e.g. Jacob Quaye" required>
-
-    <label for="labName">Lab Name</label>
-    <input type="text" id="labName" name="labName" th:value="${labName}" placeholder="e.g. Containerization Lab" required>
-
-    <button type="submit">Submit</button>
-</form>
-
-<div class="result" th:if="${submitted}">
-    <p><strong>Full Name:</strong> <span th:text="${fullName}"></span></p>
-    <p><strong>Lab Name:</strong> <span th:text="${labName}"></span></p>
+<div class="result">
+    <p><strong>Full Name:</strong> Jacob Quaye</p>
+    <p><strong>Lab Name:</strong> Containerization Lab</p>
 </div>
 
 </body>

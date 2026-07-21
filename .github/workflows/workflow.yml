@@ -9,6 +9,7 @@ on:
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+  CONFIG_BUCKET: ${{ vars.CONFIG_BUCKET }}
 
 jobs:
   build-and-push:
@@ -43,8 +44,22 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
+
+      - name: Inject env vars into taskdef.json
+        env:
+          DB_SECRET_ARN: ${{ vars.DB_SECRET_ARN }}
+          DB_HOST: ${{ vars.DB_HOST }}
+          EXECUTION_ROLE_ARN: ${{ vars.EXECUTION_ROLE_ARN }}
+          TASK_ROLE_ARN: ${{ vars.TASK_ROLE_ARN }}
+          IMAGES_BUCKET_PARAM_ARN: ${{ vars.IMAGES_BUCKET_PARAM_ARN }}
+          CLOUDFRONT_PARAM_ARN: ${{ vars.CLOUDFRONT_PARAM_ARN }}
+        run: envsubst < taskdef.json > taskdef.resolved.json && mv taskdef.resolved.json taskdef.json
+
+      - name: Upload deployment config to S3
+        run: |
+          zip config.zip taskdef.json appspec.yaml
+          aws s3 cp config.zip s3://${{ env.CONFIG_BUCKET }}/config.zip
 
       - name: Image digest
         run: echo "Pushed image ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }} (digest ${{ steps.build-image.outputs.digest }})"
