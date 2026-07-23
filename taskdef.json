@@ -2,8 +2,8 @@
   "family": "ecs-fargate-demo-task",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
-  "cpu": "256",
-  "memory": "512",
+  "cpu": "1024",
+  "memory": "2048",
   "executionRoleArn": "arn:aws:iam::481980074895:role/ecs-fargate-demo-task-execution-role",
   "taskRoleArn": "arn:aws:iam::481980074895:role/ecs-fargate-demo-task-role",
   "containerDefinitions": [
