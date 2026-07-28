@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class LabController {
 
-    @GetMapping("/lab")
+    @GetMapping("/ecs-change")
     public String labForm() {
         return "lab";
     }
